@@ -1,2 +1,5 @@
 python .\face_recognition.py --train_data ./dataset/train/ --val_data ./dataset/val/ --save_data 6_faces_dataset.npz
 python test.py --face_dataset 6_faces_dataset.npz --facenet_model facenet_keras.h5 --face_embedding 6_faces_embeddings.npz
+python predict_face_embeddings.py --face_embedding 6-faces-embeddings.npz
+python face_classification.py --face_dataset 6_faces_dataset.npz --face_embedding 6-faces-embeddings.npz
+python .\pre_processing.py -i <ten_anh>
