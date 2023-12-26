@@ -9,15 +9,14 @@ from numpy import savez_compressed
 def extract_face(filename, required_size=(160, 160)):
     detector = MTCNN()
     print(">>> filename", filename)
-    
     img = cv2.imread(filename)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     face = detector.detect_faces(img)
     print(">>> faces", face)
-    [x,y,width,height] = face[0]['box']
+    arr=[x,y,width,height] = face[0]['box']
     face = img[y:y+height,x:x+width]
     face = cv2.resize(face, required_size, face)
-    return face
+    return face, arr
 
 def load_faces(directory):
 	faces = list()
@@ -26,7 +25,7 @@ def load_faces(directory):
 		# path
 		path = directory + filename
 		# get face
-		face = extract_face(path)
+		face,_ = extract_face(path)
 		# store
 		faces.append(face)
 	return faces
