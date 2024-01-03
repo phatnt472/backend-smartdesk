@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from datetime import datetime,timedelta
 
 # Kết nối đến MongoDB (mặc định là localhost, port 27017)
-client = MongoClient('mongodb+srv://20520646:20520646@cluster0.ukwx1ww.mongodb.net/')
+client = MongoClient('mongodb://localhost:27017/123456')
 
 # Tên cơ sở dữ liệu và collection
 database = client['QLSV']
@@ -64,17 +64,17 @@ DiemSo_data = [
     {"MaSV": "19520965", "MaLMH": "CE206.O11", "HocKy": "HK1", "NamHoc": "2022-2023", "Diem": 9.2},
 ]
 SinhVien_data = [
-    {"MaSV": "20520646", "TenSV": "Vo Nhat Nam", "Lop": "CE410.O11",
+    {"MaSV": "20520646", "TenSV": "Vo Nhat Nam",
      "GioiTinh": "Nam", "NoiSinh": "TienGiang", "Dia Chi": "HCM", "TenDN": "20520646", "MK": "123456"},
-    {"MaSV": "20521737", "TenSV": "Nguyen Thanh Phat", "Lop": "CE410.O11",
+    {"MaSV": "20521737", "TenSV": "Nguyen Thanh Phat",
      "GioiTinh": "Nam", "NoiSinh": "TienGiang", "DiaChi": "HCM", "TenDN": "20521737", "MK": "123456"},
-    {"MaSV": "20521727", "TenSV": "Tran Bao Nhung", "Lop": "CE410.O11",
+    {"MaSV": "20521727", "TenSV": "Tran Bao Nhung",
      "GioiTinh": "Nu", "NoiSinh": "TienGiang", "DiaChi": "HCM", "TenDN": "20521727", "MK": "123456"},
-    {"MaSV": "20520467", "TenSV": "Le Nguyen Quang Duy", "Lop": "CE410.O11",
+    {"MaSV": "20520467", "TenSV": "Le Nguyen Quang Duy",
      "GioiTinh": "Nam", "NoiSinh": "TienGiang", "DiaChi": "HCM", "TenDN": "20520647", "MK": "123456"},
-    {"MaSV": "19520965", "TenSV": "Pham Ngoc Thanh Thao", "Lop": "CE410.O11",
+    {"MaSV": "19520965", "TenSV": "Pham Ngoc Thanh Thao",
      "GioiTinh": "Nu", "NoiSinh": "TienGiang", "DiaChi": "HCM", "TenDN": "20520646", "MK": "123456"},
-    {"MaSV": "20520438", "TenSV": "Tran Tuan Dat", "Lop": "CE410.O11",
+    {"MaSV": "20520438", "TenSV": "Tran Tuan Dat",
      "GioiTinh": "Nam", "NoiSinh": "TienGiang", "DiaChi": "HCM", "TenDN": "20520438", "MK": "123456"},
 ]
 
@@ -112,12 +112,6 @@ for bh in BuoiHoc_data:
             lopmonhoc["BuoiHoc"] = []
         lopmonhoc["BuoiHoc"].append(bh)
         LopMonHoc_collection.replace_one({"MaLMH": lopmonhoc_ma}, lopmonhoc)
-# for sv in SinhVien_data:
-#     all_lopmonhoc = LopMonHoc_collection.find({})
-#     if "MonHoc" not in sv:
-#         sv["MonHoc"] = []
-#     sv["MonHoc"].extend(all_lopmonhoc)
-#     SinhVien_collection.replace_one({"MaSV": sv["MaSV"]}, sv)
 for sv in SinhVien_data:
     masv = sv["MaSV"]
     phuhuynh = PhuHuynh_collection.find({"MaSV": masv})
@@ -125,6 +119,3 @@ for sv in SinhVien_data:
         sv["PhuHuynh"] = []
     sv["PhuHuynh"].extend(phuhuynh)
     SinhVien_collection.replace_one({"MaSV": masv}, sv)
-
-
-

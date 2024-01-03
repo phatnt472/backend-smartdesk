@@ -18,7 +18,7 @@ GiangVien_collection = database["GiangVien"]
 
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/123456"
+app.config["MONGO_URI"] = "mongodb+srv://20520646:20520646@cluster0.ukwx1ww.mongodb.net/"
 mongo = PyMongo(app)
 CORS(app)
 @app.route('/students/<MaSV>',methods= ['GET','POST'])
